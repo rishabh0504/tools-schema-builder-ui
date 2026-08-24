@@ -1,0 +1,38 @@
+name: CI & Build
+
+on:
+  push:
+    branches: ["main", "feat/*"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Library & Playground
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Library (tsup ESM/CJS/DTS)
+        run: pnpm run build:lib
+
+      - name: Verify Package Tarball
+        run: npm pack --dry-run
+
+      - name: Build Next.js Playground
+        run: pnpm run build
