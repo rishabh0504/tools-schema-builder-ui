@@ -1,5 +1,5 @@
 {
-  "name": "tool-schema-builder",
+  "name": "@rishabh0504/tools-schema-builder-ui",
   "version": "0.1.0",
   "description": "Headless-ready, shadcn-compatible AI Tool & JSON Schema Visual Builder for OpenAI, Claude, Gemini, MCP, and Zod",
   "license": "MIT",
